@@ -1,6 +1,6 @@
 from environment import *
 class Producer:
-    population: float = 0
+    population: int = 0
     environment: Environment
     name: str
     def __init__(self, name: str, env:Environment, pop: float):
@@ -10,7 +10,4 @@ class Producer:
     
     def grow(self):
         env = self.environment
-        self.population = min(env.getMaxPlantLife(), self.population * env.nutrients * env.sunlight * env.temperature)
-    
-    def __toString__(self):
-        return self.name
+        self.population = min(env.getMaxPlantLife(), int(self.population * env.sunlight * env.temperature))
