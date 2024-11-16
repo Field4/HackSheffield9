@@ -10,8 +10,8 @@ import animationPage
 
 selected = "Home"
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Home","Graph", "Animation","Settings"],
-    icons = ['house', 'graph-up', 'tv','gear'], menu_icon = "cast", default_index=1)
+    selected = option_menu("Main Menu", ["Graph","Home", "Animation","Settings"],
+    icons = ['graph-up', 'house', 'tv','gear'], menu_icon = "cast", default_index=1)
 
 
 if selected == "Home":
