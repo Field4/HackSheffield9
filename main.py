@@ -1,11 +1,12 @@
 from environment import *
-#from animal import *
 from herbivore import *
 
 env = Environment(15, 0.5)
 cow = Herbivore(100, 0.75, 2)
 
-for i in range(10):
+NUM_ITERATIONS = 10
+
+for i in range(NUM_ITERATIONS):
     env.generatePlantLife()
     eaten = cow.dieOrReproduce(env.plantLifeAvailable)
     env.eatPlants(eaten)
