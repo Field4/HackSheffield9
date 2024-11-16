@@ -1,4 +1,5 @@
 from environment import *
+#from animal import *
 from herbivore import *
 
 env = Environment(15, 0.5)
