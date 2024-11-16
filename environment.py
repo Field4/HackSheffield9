@@ -4,7 +4,7 @@ class Environment:
     temperature = 15
     sunlight = 0.5
 
-    plantGrowthFactor = (temperature * sunlight) / MAX_TEMP # (times 1)
+    plantGrowthFactor = 0
 
     plantLifeAvailable : float = 100
 
@@ -12,7 +12,7 @@ class Environment:
         self.temperature = t
         self.sunlight = s
         self.plantLifeAvailable = initialFood
-        self.plantGrowthFactor = (self.temperature * self.sunlight) / MAX_TEMP
+        self.plantGrowthFactor = 1 + (self.temperature * self.sunlight) / MAX_TEMP
 
     def generatePlantLife(self):
         self.plantLifeAvailable =  self.plantLifeAvailable * self.plantGrowthFactor

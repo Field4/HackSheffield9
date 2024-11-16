@@ -1,11 +1,9 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
 
 from environment import *
 from herbivore import *
 
-env = Environment(15, 0.5, 10000000)
+env = Environment(15, 0.5, 1000)
 cow = Herbivore(100, 0.75, 2)
 
 food_available_history = []

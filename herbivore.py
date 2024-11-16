@@ -3,7 +3,7 @@ class Herbivore:
     plantUtilisation : float = 0.5
     foodDemand : int = 1
 
-    kill_rate : float = 0 # represents the amount of plants that get killed by the herbivore
+    kill_rate : float = 1 # represents the amount of plants that get killed by the herbivore
 
     def __init__(self, initialPop : int, plantUtilisation : float, foodDemand : int):
         self.population = initialPop
