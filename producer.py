@@ -8,6 +8,6 @@ class Producer:
         self.population = pop
         self.environment = env
     
-    def grow(self):
+    def grow(self, growth_factor):
         env = self.environment
-        self.population = min(env.getMaxPlantLife(), int(self.population * env.sunlight * env.temperature))
+        self.population = max( 10, min(env.getMaxPlantLife(), int(self.population * env.sunlight * env.temperature * growth_factor)))

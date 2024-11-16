@@ -7,6 +7,7 @@ class Environment:
 
     def getMaxPlantLife(self):
         return self.temperature * self.sunlight * self.nutrients
+
     
     
 #newEnv = Environment(15, 0.5)
