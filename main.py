@@ -9,20 +9,20 @@ from environment import *
 from herbivore import *
 
 def get_random_positions_in_sheffield(n, max):
-    numCowsToDisplay = int(min(n, max))
-    positions = np.random.randn(numCowsToDisplay, 2) / [50,50] + [53.38, -1.4786]
+    numpreysToDisplay = int(min(n, max))
+    positions = np.random.randn(numpreysToDisplay, 2) / [50,50] + [53.38, -1.4786]
     return positions
 
-def displayRandomOnMap(cow_population, title, size, colour):
+def displayRandomOnMap(prey_population, title, size, colour):
     df = pd.DataFrame(
-        get_random_positions_in_sheffield(cow_population, 200), columns = ["lat", "lon"]
+        get_random_positions_in_sheffield(prey_population, 200), columns = ["lat", "lon"]
     )
     st.write(title)
     st.map(df, zoom=11, size=size, color=colour)
 
-def displayOnMap(cow_positions, title, size, colour):
+def displayOnMap(prey_positions, title, size, colour):
     df = pd.DataFrame(
-        cow_positions, columns = ["lat", "lon"]
+        prey_positions, columns = ["lat", "lon"]
     )
     st.write(title)
     return st.map(df, zoom=11, size=size, color=colour)
@@ -37,9 +37,9 @@ def get_offset_positions(prey_positions, predator_population):
     return pairs
 
 
-def eatCowsOnMap(cow_population, predator_population, title, cow_size, cow_colour, carnivore_size, carnivore_colour):
-    prey_positions = get_random_positions_in_sheffield(cow_population, 500)
-    map = displayOnMap(prey_positions, title, cow_size, cow_colour)
+def eatpreysOnMap(prey_population, predator_population, title, prey_size, prey_colour, carnivore_size, carnivore_colour):
+    prey_positions = get_random_positions_in_sheffield(prey_population, 500)
+    map = displayOnMap(prey_positions, title, prey_size, prey_colour)
 
     time.sleep(5)
 
@@ -48,7 +48,7 @@ def eatCowsOnMap(cow_population, predator_population, title, cow_size, cow_colou
     map.empty()
 
     colours = []
-    for i in range(int(cow_population)):
+    for i in range(int(prey_population)):
         colours.append("#6e3300")
     for i in range(int(predator_population)):
         colours.append("#ff0000")
@@ -66,35 +66,35 @@ def eatCowsOnMap(cow_population, predator_population, title, cow_size, cow_colou
     map = st.map(combined_frame, latitude="latitudes", longitude="longitudes", color="colours")
     time.sleep(5)
     map.empty()
-    if predator_population < cow_population:
-        remaining_cows = []
-        for i in range(int(predator_population), int(cow_population)):  #this feels wrong but it works, so it might create an error later
-            remaining_cows.append(prey_positions[i])
-        print(remaining_cows)
-        map = displayOnMap(remaining_cows, title, cow_size, cow_colour)
+    if predator_population < prey_population:
+        remaining_preys = []
+        for i in range(int(predator_population), int(prey_population)):  #this feels wrong but it works, so it might create an error later
+            remaining_preys.append(prey_positions[i])
+        print(remaining_preys)
+        map = displayOnMap(remaining_preys, title, prey_size, prey_colour)
 
 
 
 env = Environment(15, 0.5, 1000)
-cow = Herbivore(11, 0.75, 2)
+prey = Herbivore(11, 0.75, 2)
 
-eatCowsOnMap(cow.population, 10, "eating", 1, "#6e3300", 1, "#ff0000")
+eatpreysOnMap(prey.population, 10, "eating", 1, "#6e3300", 1, "#ff0000")
 
 food_available_history = []
-cow_population_history = []
+prey_population_history = []
 
 for i in range(6):
     env.generatePlantLife()
-    eaten = cow.dieOrReproduce(env.plantLifeAvailable)
-    env.eatPlants(eaten * cow.kill_rate)
+    eaten = prey.dieOrReproduce(env.plantLifeAvailable)
+    env.eatPlants(eaten * prey.kill_rate)
     print("Iteration n = " + str(i))
     print("Food available: " + str(env.plantLifeAvailable))
-    print("Number of cows: " + str(cow.population))
+    print("Number of preys: " + str(prey.population))
     food_available_history.append(env.plantLifeAvailable)
-    cow_population_history.append(cow.population)
+    prey_population_history.append(prey.population)
 
 
 
 st.line_chart(food_available_history)
-st.line_chart(cow_population_history)
+st.line_chart(prey_population_history)
 
