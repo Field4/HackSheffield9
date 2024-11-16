@@ -19,6 +19,5 @@ for i in range(50):
     food_available_history.append(env.plantLifeAvailable)
     cow_population_history.append(cow.population)
 
-#chart_data = pd.DataFrame({"food": food_available_history, "cows": cow_population_history})
 st.line_chart(food_available_history)
 st.line_chart(cow_population_history)
