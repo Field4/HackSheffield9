@@ -1,7 +1,7 @@
 from environment import *
 from herbivore import *
 
-env = Environment(15, 0.5, 100)
+env = Environment(15, 0.5, 100, 100)
 cow = Herbivore(100, 0.75, 2)
 
 NUM_ITERATIONS = 10
