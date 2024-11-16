@@ -1,6 +1,4 @@
 class Environment:
-   
-    
 
     def __init__(self, t : int, s : float, p: float, n: float):
         self.temperature = t
@@ -16,7 +14,6 @@ class Environment:
         self.plantLifeAvailable = min(self.getMaxPlantLife(), self.plantLifeAvailable * self.temperature * self.sunlight)
 
     
-
     def eatPlants(self, amountEaten : int):
         self.plantLifeAvailable -= amountEaten
     
