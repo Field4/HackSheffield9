@@ -3,10 +3,10 @@ import numpy as np
 import pandas as pd
 from streamlit_option_menu import option_menu
 
-import graphPage
-import homePage
-import settingsPage
-import animationPage
+import Pages.graphPage as graphPage
+import Pages.homePage as homePage
+import Pages.settingsPage as settingsPage
+import Pages.animationPage as animationPage
 
 
 
