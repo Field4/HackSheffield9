@@ -15,7 +15,10 @@ col1, col2 = st.columns(2)
 df1 = main.main()
 df3 = main.main()
 #with col1:
-st.title("Some Graphs")
+st.markdown("This Graph shows the equilibrium reached in the following food chain:")
+st.markdown("1. Moose eats Plant")
+st.markdown("2. Wolf eats Moose")
+st.markdown("3. Humans eat everything")
 st.line_chart(df1)
     #st.line_chart(df2)
 
