@@ -45,9 +45,27 @@ def main():
             if available < demand:
                 # kill amount based on amount missing per demand
                 animal.cull(DEATH_RATE * (demand-available)/demand)
-
-
-
     return toFrame(data)
+
+def do_iteration():
+    for plnt in plants:
+        plnt.grow(env.plantGrowthRate * plnt.population)
+        
+    for animal in animals:
+        demand = animal.getDemand()
+        available = animal.food_sources[0].population * animal.feedstock_utilisation
+
+        if available > demand:
+            excess = available - demand
+            # cap demand to 125% of required
+            #excessRatio = min(animal.growthRate, excess/demand)
+            # grow based on how much excess food there is
+            animal.grow(animal.population*(animal.growthRate-1))
+            # eat based on new damand
+            animal.eat(min(available, demand*animal.growthRate))
+            
+        if available < demand:
+             # kill amount based on amount missing per demand
+             animal.cull(DEATH_RATE * (demand-available)/demand)
 
 main()
