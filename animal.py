@@ -4,43 +4,33 @@ class Animal:
     food_demand:float = 1
     food_sources:list = []
     name:str
+    growthRate: float
 
-    def __init__(self, name : str, initial_pop : int, food_demand: float, feedstock_utilisation: float):
+    def __init__(self, name : str, initial_pop : int, food_demand: float, feedstock_utilisation: float, growthRate: float):
         self.population = initial_pop
         self.food_sources
         self.name = name
         self.food_demand = food_demand
         self.feedstock_utilisation = feedstock_utilisation
+        self.growthRate = growthRate
 
-    def eat(self, food_weight):
+    def eat(self, amount):
+        # food weight is the proportion of the food source that gets eaten
         # eat an amount of each food source proportional to how much of each is left
-        #print(self.name, "is eating: ")
-        for food in self.food_sources:
-            food.population -=  int(food.population * food_weight)
+        print(amount)
+        self.food_sources[0].die(amount)
         
-
+    def getDemand(self):
+        return self.food_demand * self.population
 
     def foodNeeded(self):
         return self.food_demand * self.population
     
-    def dieOrReproduce(self):
-        # count the total food value of all food sources
-        total_food = 0
-        for food in self.food_sources:
-            total_food += food.population
+    def cull(self, ratio:float):
+        self.die(ratio * self.population)
         
-        available_food = total_food * self.feedstock_utilisation
-        required_food = self.foodNeeded()
-        #print(available_food, required_food)
-        food_ratio = available_food/required_food
-        food_ratio = min(food_ratio, 1.25)
-
-        self.grow(food_ratio)
-
-        self.eat(self.foodNeeded()/total_food) # use new population for eating
-
-    def grow(self, food_ratio):
-        if food_ratio <1: print(self.name, "population does not have enough food and will shrink")
-        if food_ratio >1: print(self.name, "population has surplus food and will grow")
-
-        self.population = int(food_ratio * self.population)
+    def die(self, amount:int):
+        self.population = max(0, int(self.population - amount))
+   
+    def grow(self, amount:int):
+        self.population = max(0, int(self.population + amount))
