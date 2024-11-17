@@ -33,7 +33,7 @@ def main():
                 # cap demand to 125% of required
                 #excessRatio = min(animal.growthRate, excess/demand)
                 # grow based on how much excess food there is
-                animal.grow(animal.population*animal.growthRate)
+                animal.grow(animal.population*(animal.growthRate-1))
                 # eat based on new damand
                 animal.eat(min(available, demand*animal.growthRate))
             

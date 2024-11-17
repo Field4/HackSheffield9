@@ -1,5 +1,5 @@
 import streamlit as st 
-import connectionTest
+#import connectionTest
 import main
 
 st.set_page_config(
