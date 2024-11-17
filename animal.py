@@ -17,10 +17,11 @@ class Animal:
         self.growthRate = growthRate
 
     def eat(self, amount):
-        # food weight is the proportion of the food source that gets eaten
-        # eat an amount of each food source proportional to how much of each is left
-        print(amount)
-        self.food_sources[0].die(amount)
+        # food weight is the amount of the food source that gets eaten
+        foodWeight = amount / len(self.food_sources)
+        for food in self.food_sources:
+            food.die(foodWeight)
+        #self.food_sources[0].die(amount)
         
     def getDemand(self):
         return self.food_demand * self.population
