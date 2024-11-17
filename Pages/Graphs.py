@@ -13,6 +13,7 @@ st.markdown("These are our graphs for displaying animal populations and food avi
 col1, col2 = st.columns(2)
 # df1, df2, df3 = connectionTest.create_graphs()
 df1 = main.main()
+df3 = main.main()
 #with col1:
 st.title("Some Graphs")
 st.line_chart(df1)
