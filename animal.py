@@ -24,9 +24,6 @@ class Animal:
         
     def getDemand(self):
         return self.food_demand * self.population
-
-    def foodNeeded(self):
-        return self.food_demand * self.population
     
     def cull(self, ratio:float):
         self.die(ratio * self.population)

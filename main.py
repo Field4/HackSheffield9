@@ -5,7 +5,7 @@ from plot import *
 import streamlit as sl
 env = Environment(1.2, 300)
 plant = Producer("plant", env, 100)
-moose = Animal("moose", 100, 0.1, 0.5, 2)
+moose = Animal("moose", 100, 1, 0.7, 2)
 moose.food_sources = [plant]
 animals = [moose]
 plants = [plant]
@@ -13,7 +13,7 @@ plants = [plant]
 data = {}
 
 NUM_ITERATIONS = 15
-DEATH_RATE = 2
+DEATH_RATE = 1.5
 
 def main():
     for i in range(NUM_ITERATIONS):
@@ -31,11 +31,11 @@ def main():
             if available > demand:
                 excess = available - demand
                 # cap demand to 125% of required
-                excessRatio = min(animal.growthRate, excess/demand)
+                #excessRatio = min(animal.growthRate, excess/demand)
                 # grow based on how much excess food there is
-                animal.grow(animal.population*animal.growthRate)
+                animal.grow(animal.population*(animal.growthRate-1))
                 # eat based on new damand
-                animal.eat(demand*excessRatio)
+                animal.eat(min(available, demand*animal.growthRate))
             
             if available < demand:
                 # kill amount based on amount missing per demand
