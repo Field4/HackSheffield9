@@ -21,13 +21,10 @@ DEATH_RATE = 1.5
 
 def main():
     for i in range(NUM_ITERATIONS):
-        #output("Iteration t", i, data)
-        print("Iteration t =", i)
+        print("Iteration t =", i) # only print time to console, x axis reps time in the graphs
         output("Plant population", plant.population, data)
         for animal in animals:
             output(animal.name + " population", animal.population, data)
-        #output("Moose population", moose.population, data)
-        #output("Wolf population", wolves.population, data)
 
         for plnt in plants:
             plnt.grow(env.plantGrowthRate * plnt.population)
