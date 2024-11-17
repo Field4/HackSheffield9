@@ -1,43 +1,48 @@
 from environment import *
 from animal import *
 from producer import *
+from plot import *
+import streamlit as sl
+env = Environment(1.2, 300)
+plant = Producer("plant", env, 100)
+moose = Animal("moose", 100, 0.1, 0.5, 2)
+moose.food_sources = [plant]
+animals = [moose]
+plants = [plant]
 
-import streamlit as st
-import pandas as pd
+data = {}
 
-env = Environment(4, 0.5, 3000)
-plant = Producer("plant", env, 2500)
-cow = Animal("cow", 1000, 1, 0.8)
-cow.food_sources = [plant]
-animals = [cow]
+NUM_ITERATIONS = 15
+DEATH_RATE = 2
 
-NUM_ITERATIONS = 40 
+def main():
+    for i in range(NUM_ITERATIONS):
+        output("Iteration t", i, data)
+        output("plant population", plant.population, data)
+        output("Moose population", moose.population, data)
 
-plant_pop = []
-cow_pop = []
-dplant = []
-dcow = []
+        for plnt in plants:
+            plnt.grow(env.plantGrowthRate * plnt.population)
+        
+        for animal in animals:
+            demand = animal.getDemand()
+            available = animal.food_sources[0].population * animal.feedstock_utilisation
+
+            if available > demand:
+                excess = available - demand
+                # cap demand to 125% of required
+                excessRatio = min(animal.growthRate, excess/demand)
+                # grow based on how much excess food there is
+                animal.grow(animal.population*animal.growthRate)
+                # eat based on new damand
+                animal.eat(demand*excessRatio)
+            
+            if available < demand:
+                # kill amount based on amount missing per demand
+                animal.cull(DEATH_RATE * (demand-available)/demand)
 
 
-for i in range(NUM_ITERATIONS):
-    print("Iteration n = " + str(i))
-    print("Food available: " + str(plant.population))
-    print("Number of cows: " + str(cow.population))
 
-    plant_pop.append(plant.population)
-    cow_pop.append(cow.population)
-    if i > 0:
-        dplant.append(plant.population - plant_pop[i-1])
-        dcow.append(cow.population - cow_pop[i-1])
+    return toFrame(data)
 
-    plant.grow(1)
-    #plant.grow(2.72/cow.population)   
-    for animal in animals:
-        animal.dieOrReproduce()
-    
-
-data = pd.DataFrame({"plants" : plant_pop, "cows" : cow_pop})
-st.line_chart(data)
-
-derivatives = pd.DataFrame({"rate of change of plant" : dplant, "rate of change of cow" : dcow})
-st.line_chart(derivatives)
+main()
