@@ -5,6 +5,10 @@ We used three different levels of the food chain to represent this:
 2. Herbivore
 3. Carnivore 
 
+#### Food chain we have used (made up)
+Plant <- Moose <- Wolf 
+Human eats Moose, Wolf and Plant 
+
 ## Replication on your computer 
 If using VS code replicate this you need to: 
 (Please use vs code, couldnt get this to work in pycharm) - will be similar process in command line
