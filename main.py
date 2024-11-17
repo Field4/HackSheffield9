@@ -29,6 +29,10 @@ def main():
     for i in range(NUM_ITERATIONS):
         # only print time to console, x axis reps time in the graphs
         print("Iteration t =", i) 
+        do_iteration()
+    return toFrame(data)
+
+def do_iteration():
         for plant in plants:
             output("Plant population", plant.population, data)
         for animal in animals:
@@ -46,7 +50,6 @@ def main():
 
             if available > demand:
                 excess = available - demand
-                # cap demand to 125% of required
                 # grow based on how much excess food there is
                 animal.grow(animal.population*(animal.growthRate-1))
                 # eat based on new damand
@@ -55,10 +58,6 @@ def main():
             if available < demand:
                 # kill amount based on amount missing per demand
                 animal.cull(DEATH_RATE * (demand-available)/demand)
-
-
-
-    return toFrame(data)
 
 (data, env, plants, animals) = initialise()
 main()
