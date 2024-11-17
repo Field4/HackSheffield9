@@ -9,8 +9,6 @@ st.set_page_config(
 
 # Add logo and title
 st.sidebar.image("logo.png")
-st.sidebar.title("Navigation")
-st.sidebar.markdown("Select a page from the sidebar.")
 
 # Home Page Content
 st.title("Home")
