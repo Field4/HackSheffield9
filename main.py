@@ -6,20 +6,24 @@ import streamlit as sl
 env = Environment(1.2, 300)
 plant = Producer("plant", env, 100)
 moose = Animal("moose", 100, 1, 0.7, 2)
+wolves = Animal("wolf", 100, 0.3, 0.7, 1.5)
 moose.food_sources = [plant]
-animals = [moose]
+wolves.food_sources = [moose]
+animals = [moose, wolves]
 plants = [plant]
 
 data = {}
 
-NUM_ITERATIONS = 15
+NUM_ITERATIONS = 30
 DEATH_RATE = 1.5
 
 def main():
     for i in range(NUM_ITERATIONS):
-        output("Iteration t", i, data)
-        output("plant population", plant.population, data)
+        #output("Iteration t", i, data)
+        print("Iteration t =", i)
+        output("Plant population", plant.population, data)
         output("Moose population", moose.population, data)
+        output("Wolf population", wolves.population, data)
 
         for plnt in plants:
             plnt.grow(env.plantGrowthRate * plnt.population)
