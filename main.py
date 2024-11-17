@@ -2,6 +2,7 @@ from environment import *
 from animal import *
 from producer import *
 from plot import *
+import streamlit as sl
 env = Environment(1.2, 300)
 plant = Producer("plant", env, 100)
 moose = Animal("moose", 100, 0.1, 0.5, 2)

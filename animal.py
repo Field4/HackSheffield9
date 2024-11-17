@@ -1,7 +1,9 @@
+import random
+
 class Animal:
     population:int = 0
-    feedstock_utilisation:float = 0.5
-    food_demand:float = 1
+    feedstock_utilisation:float = 1
+    food_demand:float = 0.5
     food_sources:list = []
     name:str
     growthRate: float
