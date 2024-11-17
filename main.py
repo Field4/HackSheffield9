@@ -7,9 +7,11 @@ env = Environment(1.2, 300)
 plant = Producer("plant", env, 100)
 moose = Animal("moose", 100, 1, 0.7, 2)
 wolves = Animal("wolf", 100, 0.3, 0.7, 1.5)
+humans = Animal("human", 10, 0.1, 0.1, 1.3)
 moose.food_sources = [plant]
 wolves.food_sources = [moose]
-animals = [moose, wolves]
+humans.food_sources = [plant, moose, wolves]
+animals = [moose, wolves, humans]
 plants = [plant]
 
 data = {}
@@ -22,8 +24,10 @@ def main():
         #output("Iteration t", i, data)
         print("Iteration t =", i)
         output("Plant population", plant.population, data)
-        output("Moose population", moose.population, data)
-        output("Wolf population", wolves.population, data)
+        for animal in animals:
+            output(animal.name + " population", animal.population, data)
+        #output("Moose population", moose.population, data)
+        #output("Wolf population", wolves.population, data)
 
         for plnt in plants:
             plnt.grow(env.plantGrowthRate * plnt.population)
