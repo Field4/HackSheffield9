@@ -76,7 +76,7 @@ def eatpreysOnMap(prey_population, predator_population, prey_size, prey_colour, 
         "colours" : colours
         }
     )
-    st.write(f"But they may not enjoy the city in peace for long, for {MAX_SHOWN_ON_MAP if predator_population > MAX_SHOWN_ON_MAP else prey_population} {predator_population}s have made the city their home.")
+    st.write(f"But they may not enjoy the city in peace for long, for {MAX_SHOWN_ON_MAP if predator_population > MAX_SHOWN_ON_MAP else prey_population} {predator_name}s have made the city their home.")
     map = st.map(combined_frame, latitude="latitudes", longitude="longitudes", color="colours")
     time.sleep(5)
     map.empty()
