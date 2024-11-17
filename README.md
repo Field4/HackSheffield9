@@ -5,7 +5,7 @@ We used three different levels of the food chain to represent this:
 2. Herbivore
 3. Carnivore 
 
-## Food chain we have used (made up)
+#### Food chain we have used (made up)
 Plant <- Moose <- Wolf 
 Human eats Moose, Wolf and Plant 
 
