@@ -1,5 +1,6 @@
 import streamlit as st 
 import connectionTest
+import main
 
 st.set_page_config(
     page_title="Graphs",
@@ -10,7 +11,7 @@ st.set_page_config(
 st.title("Graphs")
 st.markdown("These are our graphs for displaying animal populations and food avilability.")
 col1, col2 = st.columns(2)
-df1, df2, df3 = connectionTest.create_graphs()
+df1, df2, df3 = main.main()
 with col1:
     st.title("Some Graphs")
     st.line_chart(df1)
